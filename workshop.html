@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Claude Code & Codex を学ぶ会 in 岡山 | degitail</title>
-<meta name="description" content="岡山開催のClaude Code・Codex実践勉強会。2026年10月18日・25日、各日10:00〜14:00ごろ。初級者向けと中級者向けから選び、自分の仕事に役立つものを作ります。">
+<title>Claude Code & Codex 勉強合宿 in 岡山 | degitail</title>
+<meta name="description" content="岡山開催のClaude Code・Codex 1日勉強合宿と、初心者の会・中級者の会。2026年10月31日・11月14日・11月21日・11月29日（いずれか1日）。勉強合宿は10:00〜17:00、初心者の会・中級者の会は10:00〜14:00。SNS投稿の自動化、動画生成、iOSアプリなどから1つ選び、その日のうちに完成させます。">
 <link rel="icon" href="icon.png" type="image/png">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -86,8 +86,18 @@ nav .nav-cta:hover{background:var(--black);color:var(--paper)}
 .section-cta{text-align:center;margin-top:30px}
 .section-cta p{font-size:13px;color:var(--dim);margin-bottom:10px}
 
+/* ── PLANS ── */
+.plan-list{list-style:none;display:grid;gap:12px;margin-bottom:18px}
+.plan-list li{border:2px solid var(--dark);padding:16px 20px;display:grid;grid-template-columns:36px 1fr;gap:14px;align-items:center}
+.plan-name{font-size:clamp(16px,2vw,19px);font-weight:700}
+.plan-desc{font-size:13.5px;color:var(--dim);line-height:1.7;margin-top:2px}
+.flow-table{display:grid;grid-template-columns:72px 1fr;border-top:2px solid var(--paper);max-width:640px}
+.flow-table>*{border-bottom:1px solid var(--dim);padding:11px 0;font-size:15px;line-height:1.6}
+.flow-table time{font-weight:700;letter-spacing:.02em}
+.flow-table small{color:var(--muted);margin-left:8px;font-size:12.5px}
+
 /* ── DATES ── */
-.date-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.date-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
 .date-card{border:2px solid var(--dark);padding:20px;display:grid;gap:7px}
 .date-card time{font-size:24px;font-weight:700}
 .date-time{font-size:14px;color:var(--dim)}
@@ -235,6 +245,7 @@ footer{background:var(--dark);color:var(--paper);padding:44px 0;border-top:2px s
       <a href="business.html">法人向け</a>
       <a href="workshop.html" class="active">勉強会</a>
       <a href="profile.html">プロフィール</a>
+      <a href="https://degitail.github.io/yoshi-portfolio/" target="_blank" rel="noopener">ポートフォリオ</a>
       <a href="mailto:degitail647@gmail.com" class="nav-cta">お問い合わせ</a>
     </nav>
     <button class="hamburger" id="hmb" aria-label="メニュー">
@@ -248,71 +259,72 @@ footer{background:var(--dark);color:var(--paper);padding:44px 0;border-top:2px s
   <a href="business.html">法人向け</a>
   <a href="workshop.html">勉強会</a>
   <a href="profile.html">プロフィール</a>
+  <a href="https://degitail.github.io/yoshi-portfolio/" target="_blank" rel="noopener">ポートフォリオ</a>
   <a href="mailto:degitail647@gmail.com">お問い合わせ</a>
 </div>
 
 <!-- HERO -->
 <section class="s-dark">
   <div class="wrap hero">
-    <p class="hero-eyebrow">DEGITAIL : KEI ／ WORKSHOP No.01</p>
-    <h1>Claude Code &amp; Codex<br>を学ぶ会 in 岡山</h1>
-    <p class="hero-lead">知るだけで終わらない。<br>自分の手で、ひとつ完成させる一日。</p>
-    <p class="hero-body">初めてAI開発に触れる方向けの初級者コースと、すでに使い始めている方向けの中級者コースを用意しました。Claude CodeまたはCodexを選び、自分の課題に合った実践に取り組みます。</p>
+    <p class="hero-eyebrow">DEGITAIL : KEI ／ 1日勉強合宿</p>
+    <h1>Claude Code &amp; Codex<br>勉強合宿 in 岡山</h1>
+    <p class="hero-lead">その日のうちに、ひとり立ち。</p>
+    <p class="hero-body">何度も通うスクールではありません。高額な教材も買いません。1日でつくって、明日から自分で使えるところまで、いっしょに進めます。現役のプロAIエンジニアが、つまずいたところもその場で直接教えます。</p>
     <ul class="hero-outcomes" aria-label="参加後に持ち帰れるもの">
-      <li>Claude Code または Codex の初期設定を終え、自分のPCで使える状態にする</li>
-      <li>ホームページ、自動化、アプリなど、自分の課題に合う成果物をひとつ形にする</li>
-      <li>講座後も一人で作業を続けられるガイドブックと作業手順を持ち帰る</li>
+      <li>Claude Code または Codex を自分のPCで使える状態にする</li>
+      <li>勉強合宿は、えらべる5つのプランから1つを選び、その日のうちに完成させる</li>
+      <li>「ひとり立ちチェック」で、明日から一人で使い続けられるかを確認する</li>
     </ul>
     <div class="hero-meta">
       <div id="hero-dates"><span>日時</span></div>
-      <div><span>会場</span>岡山駅周辺の会議室（確定後にご案内）</div>
+      <div><span>会場</span>レンタルスペース デルタ岡山（仮）</div>
       <div><span>定員</span><span id="hero-capacity"></span></div>
-      <div><span>参加費</span>当日2,000円 ／ 前払い1,800円 ／ 紹介割（事前払い）1,500円</div>
+      <div><span>参加費</span>勉強合宿 3,500円〜／初心者の会・中級者の会 2,000円〜</div>
     </div>
+    <p class="hero-body" style="margin-bottom:28px">同じ日程で、4時間の「初心者の会」「中級者の会」（10:00〜14:00）にも参加できます。</p>
     <a href="#reserve" class="cta-btn">参加を申し込む</a>
   </div>
 </section>
 
-<!-- COURSES -->
+<!-- PLANS -->
 <section class="s-light">
   <div class="wrap sec">
-    <p class="sec-eyebrow">COURSES</p>
-    <h2>経験に合わせて選べる2コース</h2>
-    <div class="courses">
-      <div class="course-card">
-        <div class="course-head">
-          <span class="course-num">1</span>
-          <span class="course-name">初級者向けコース</span>
-        </div>
-        <p class="course-label">はじめてでも、セットアップから一緒に進めます</p>
-        <p class="course-desc">AIの全体像と事例を知り、Claude CodeまたはCodexを自分のPCで使える状態にします。最後は講師のサポートを受けながら、作りたいものをひとつ形にします。</p>
-        <ol class="course-flow">
-          <li><b>1</b><span>AIの概要とClaude Code・Codexの違い</span></li>
-          <li><b>2</b><span>仕事や地域で使える事例紹介</span></li>
-          <li><b>3</b><span>インストールと初期セットアップ</span></li>
-          <li><b>4</b><span>自主制作と成果共有</span></li>
-        </ol>
-      </div>
-      <div class="course-card">
-        <div class="course-head">
-          <span class="course-num">2</span>
-          <span class="course-name">中級者向けコース</span>
-        </div>
-        <p class="course-label">すでに使った経験があり、実務へつなげたい方向け</p>
-        <p class="course-desc">作りたいものを要件に分解し、AIへのルール設定、既存ファイルの改善、外部サービス連携、テストまでを実践します。完成後も使い続けられる形を目指します。</p>
-        <ol class="course-flow">
-          <li><b>1</b><span>課題整理と完成条件の決め方</span></li>
-          <li><b>2</b><span>プロジェクトルールと指示設計</span></li>
-          <li><b>3</b><span>外部サービス連携・既存データ活用</span></li>
-          <li><b>4</b><span>テスト、改善、自動実行への仕上げ</span></li>
-        </ol>
-      </div>
-    </div>
-    <p class="course-note">＊ 受講レベルとは別に、申込フォームで使用するAI（Claude Code／Codex）を選べます。</p>
+    <p class="sec-eyebrow">PLANS</p>
+    <h2>えらべるプラン</h2>
+    <p class="course-label" style="margin-bottom:16px">どれか1つを、その日のうちに完成させます</p>
+    <ol class="plan-list">
+      <li><span class="course-num">1</span><div><div class="plan-name">SNS投稿の完全自動化</div><p class="plan-desc">投稿文の作成から予約投稿まで、毎日の発信をAIにまかせる仕組みをつくります。</p></div></li>
+      <li><span class="course-num">2</span><div><div class="plan-name">動画生成の自動化</div><p class="plan-desc">台本・画像・音声から動画を自動でつくる流れを組み立てます。</p></div></li>
+      <li><span class="course-num">3</span><div><div class="plan-name">iOSアプリのテストリリース</div><p class="plan-desc">自分のアプリをつくり、iPhoneで試せる状態まで進めます（Macが必要です）。</p></div></li>
+      <li><span class="course-num">4</span><div><div class="plan-name">Xリサーチの自動化</div><p class="plan-desc">気になるテーマの投稿を集めて、AIで要点をまとめる仕組みをつくります。</p></div></li>
+      <li><span class="course-num">5</span><div><div class="plan-name">その他</div><p class="plan-desc">ホームページ、業務の自動化など、作りたいものを申込フォームに書いてください。当日いっしょに範囲を決めます。</p></div></li>
+    </ol>
+    <p class="course-note">＊ プランとは別に、申込フォームで使用するAI（Claude Code／Codex）を選べます。</p>
     <div class="section-cta">
-      <p>希望コースは申込フォームで選べます</p>
+      <p>プランは申込フォームで選べます</p>
       <a href="#reserve" class="cta-btn dark">日程を選んで申し込む</a>
     </div>
+  </div>
+</section>
+
+<!-- REGULAR -->
+<section class="s-light">
+  <div class="wrap sec">
+    <p class="sec-eyebrow">REGULAR</p>
+    <h2>初心者の会・中級者の会（10:00〜14:00）</h2>
+    <div class="courses">
+      <div class="course-card">
+        <div class="course-head"><span class="course-num">A</span><span class="course-name">初心者の会</span></div>
+        <p class="course-label">はじめてでも、セットアップから一緒に進めます</p>
+        <p class="course-desc">AIの全体像と事例を知り、Claude CodeまたはCodexを自分のPCで使える状態にします。最後は講師のサポートを受けながら、作りたいものをひとつ形にします。</p>
+      </div>
+      <div class="course-card">
+        <div class="course-head"><span class="course-num">B</span><span class="course-name">中級者の会</span></div>
+        <p class="course-label">すでに使った経験があり、実務へつなげたい方向け</p>
+        <p class="course-desc">作りたいものを要件に分解し、AIへのルール設定、既存ファイルの改善、外部サービス連携、テストまでを実践します。</p>
+      </div>
+    </div>
+    <p class="course-note">＊ 勉強合宿と同じ日程・会場で開催します。参加費は当日2,000円／事前決済1,800円／友達と2名以上で1,800円/人です。</p>
   </div>
 </section>
 
@@ -323,7 +335,7 @@ footer{background:var(--dark);color:var(--paper);padding:44px 0;border-top:2px s
     <h2>開催日程</h2>
     <div class="date-grid" id="date-grid"></div>
     <div class="section-cta">
-      <p>複数の日程を希望できます</p>
+      <p>参加はいずれか1日です。都合のよい日を複数選べます</p>
       <a href="#reserve" class="cta-btn dark">希望日を選ぶ</a>
     </div>
   </div>
@@ -333,30 +345,19 @@ footer{background:var(--dark);color:var(--paper);padding:44px 0;border-top:2px s
 <section class="s-dark">
   <div class="wrap sec">
     <p class="sec-eyebrow" style="color:var(--muted)">TIMETABLE</p>
-    <h2>コース別の進め方</h2>
-    <div class="programs">
-      <div class="program">
-        <h3>初級者向け</h3>
-        <ol>
-          <li>AIの概要と活用事例を知る</li>
-          <li>Claude Code／Codexをセットアップする</li>
-          <li>見本を一緒に作り、基本操作を身につける</li>
-          <li>自主制作で自分のアイデアを形にする</li>
-          <li>成果共有と次に学ぶことを整理する</li>
-        </ol>
-      </div>
-      <div class="program">
-        <h3>中級者向け</h3>
-        <ol>
-          <li>解決したい業務と完成条件を設計する</li>
-          <li>AIが迷わないルールと作業手順を作る</li>
-          <li>既存ファイルや外部サービスをつなぐ</li>
-          <li>実装、テスト、エラー修正を繰り返す</li>
-          <li>定期実行や引き継ぎを見据えて仕上げる</li>
-        </ol>
-      </div>
+    <h2>当日の流れ</h2>
+    <div class="flow-table">
+      <time>10:00</time><span>イントロ・プラン選択</span>
+      <time>10:30</time><span>セットアップ</span>
+      <time>11:00</time><span>制作①<small>設計と土台づくり</small></span>
+      <time>12:00</time><span>お昼休憩</span>
+      <time>13:00</time><span>制作②<small>個別サポートあり</small></span>
+      <time>15:00</time><span>休憩</span>
+      <time>15:15</time><span>制作③<small>動作確認・仕上げ</small></span>
+      <time>16:30</time><span>成果共有・ひとり立ちチェック</span>
+      <time>17:00</time><span>終了</span>
     </div>
-    <p style="font-size:13.5px;color:var(--muted);margin-top:18px">＊ 開催時間は各日10:00〜14:00ごろ。ノートPC必須。AIサービスの利用料は自己負担です。</p>
+    <p style="font-size:13.5px;color:var(--muted);margin-top:18px">＊ 上は勉強合宿（10:00〜17:00）の流れです。初心者の会・中級者の会は10:00〜14:00です。ノートPC必須（iOSプランはMac）。昼食は各自でお取りください。</p>
   </div>
 </section>
 
@@ -393,24 +394,43 @@ footer{background:var(--dark);color:var(--paper);padding:44px 0;border-top:2px s
   <div class="wrap sec">
     <p class="sec-eyebrow">PRICING</p>
     <h2>参加費</h2>
+    <p class="course-label" style="margin-bottom:12px">勉強合宿（10:00〜17:00）</p>
     <div class="pricing-grid">
       <div class="price-card">
-        <div class="price-label">当日払い</div>
+        <div class="price-label">当日払い（1名）</div>
+        <div class="price-value">3,500<small>円／人</small></div>
+        <p class="price-detail">開催当日に会場でお支払いください。</p>
+      </div>
+      <div class="price-card">
+        <div class="price-label">友達と2名以上で参加</div>
+        <div class="price-value">2,800<small>円／人</small></div>
+        <p class="price-detail">同じ日に2名以上で参加する場合の1名あたりの料金です。お支払い方法は、お申込み後に別途ご案内します。</p>
+      </div>
+      <div class="price-card recommend">
+        <div class="price-label">事前決済</div>
+        <div class="price-value">3,000<small>円／人</small></div>
+        <p class="price-detail">お申込み完了後、Stripe（オンライン決済サービス）のお支払いページからお支払いください。事前決済は開催日の前日までです。</p>
+      </div>
+    </div>
+    <p class="course-label" style="margin:28px 0 12px">初心者の会・中級者の会（10:00〜14:00）</p>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-label">当日払い（1名）</div>
         <div class="price-value">2,000<small>円／人</small></div>
         <p class="price-detail">開催当日に会場でお支払いください。</p>
       </div>
       <div class="price-card">
-        <div class="price-label">事前払い</div>
+        <div class="price-label">友達と2名以上で参加</div>
         <div class="price-value">1,800<small>円／人</small></div>
-        <p class="price-detail">お申込み完了後、Stripe（オンライン決済サービス）のお支払いページからお支払いください。</p>
+        <p class="price-detail">同じ日に2名以上で参加する場合の1名あたりの料金です。お支払い方法は、お申込み後に別途ご案内します。</p>
       </div>
       <div class="price-card recommend">
-        <div class="price-label">紹介割（事前払い限定）</div>
-        <div class="price-value">1,500<small>円／人</small></div>
-        <p class="price-detail">紹介した方・紹介された方のどちらも、事前払いで1名につき1,500円です。お支払い方法は、お申込み後に別途ご案内します。</p>
+        <div class="price-label">事前決済</div>
+        <div class="price-value">1,800<small>円／人</small></div>
+        <p class="price-detail">お申込み完了後、Stripe（オンライン決済サービス）のお支払いページからお支払いください。事前決済は開催日の前日までです。</p>
       </div>
     </div>
-    <p class="course-note" style="margin-top:14px">＊ 上記は岡山会場（オフライン）の参加費です。オンライン参加の参加費・お支払い方法は別途ご案内します。</p>
+    <p class="course-note" style="margin-top:14px">＊ 参加費はドリンク代込みです。上記は岡山会場（オフライン）の参加費です。オンライン参加の参加費・お支払い方法は別途ご案内します。</p>
   </div>
 </section>
 
@@ -420,10 +440,10 @@ footer{background:var(--dark);color:var(--paper);padding:44px 0;border-top:2px s
     <p class="sec-eyebrow">BEFORE YOU COME</p>
     <h2>当日までにご用意ください</h2>
     <ul class="check-grid">
-      <li><span><strong>ノートPCと充電器</strong><br>WindowsまたはMac。会場で長時間使うため、充電器もお持ちください。</span></li>
-      <li><span><strong>AIサービスの有料プラン</strong><br>Claude Pro または ChatGPT Plus のどちらかをご用意ください。難しければ当日サポートします。</span></li>
+      <li><span><strong>ノートPCと充電器</strong><br>WindowsまたはMac。iOSアプリのプランはMacが必要です。1日使うため、充電器もお持ちください。</span></li>
+      <li><span><strong>AIサブスクの事前登録（必須）</strong><br>Claude Pro または ChatGPT Plus（月額3,000円程度）のどちらかに、当日までに登録してください。</span></li>
       <li><span><strong>ログイン情報</strong><br>当日使うAIアカウントのメールアドレスとパスワードをご確認ください。</span></li>
-      <li><span><strong>作りたいもののメモ</strong><br>「毎週の集計を自動化したい」など、困っている作業を1つ書いておいてください。</span></li>
+      <li><span><strong>昼食</strong><br>お昼休憩（12:00〜13:00）の昼食は各自でお取りください。</span></li>
     </ul>
   </div>
 </section>
@@ -436,7 +456,7 @@ footer{background:var(--dark);color:var(--paper);padding:44px 0;border-top:2px s
     <div class="faq-list">
       <details>
         <summary>プログラミング未経験でも参加できますか？</summary>
-        <p>はい。初級者向けコースでは、インストールと基本操作から一緒に進めます。専門用語もその場で説明します。</p>
+        <p>はい。セットアップから一緒に進め、つまずいたところもその場で講師が直接サポートします。専門用語もその場で説明します。</p>
       </details>
       <details>
         <summary>Claude CodeとCodexのどちらを選べばよいですか？</summary>
@@ -444,19 +464,19 @@ footer{background:var(--dark);color:var(--paper);padding:44px 0;border-top:2px s
       </details>
       <details>
         <summary>無料プランのまま参加できますか？</summary>
-        <p>ハンズオンにはClaude ProまたはChatGPT Plusの有料プランが必要です。契約方法が不安な方は、申込時の質問欄にご記入ください。</p>
+        <p>参加にはClaude ProまたはChatGPT Plusの有料プラン（月額3,000円程度）への事前登録が必要です。契約方法が不安な方は、申込時の質問欄にご記入ください。</p>
       </details>
       <details>
         <summary>当日は何を作りますか？</summary>
-        <p>ホームページ、スマホアプリ、note投稿の自動化、画像・動画制作などから、ご自身の課題に合うものを選びます。最初に作る範囲を一緒に整理します。</p>
+        <p>「SNS投稿の完全自動化」「動画生成の自動化」「iOSアプリのテストリリース」「Xリサーチの自動化」「その他」の5つから1つを選び、その日のうちに完成させます。最初に作る範囲を一緒に整理します。</p>
       </details>
       <details>
         <summary>会場と日程はいつ確定しますか？</summary>
-        <p>希望日を確認後、確定した開催日と岡山駅周辺の会場をメールでご案内します。希望日は複数選択できます。</p>
+        <p>会場はレンタルスペース デルタ岡山（仮）です。希望日を確認後、確定した参加日と会場をメールでご案内します。希望日は複数選択できます。</p>
       </details>
       <details>
         <summary>キャンセルはできますか？</summary>
-        <p>開催3日前までにメールでご連絡ください。事前払いの返金方法は、申込後の案内メールでお知らせします。</p>
+        <p>開催3日前までにメールでご連絡ください。事前決済の返金方法は、申込後の案内メールでお知らせします。</p>
       </details>
     </div>
     <div class="section-cta">
@@ -505,11 +525,23 @@ footer{background:var(--dark);color:var(--paper);padding:44px 0;border-top:2px s
             <input id="f-email" type="email" placeholder="you@example.com" required>
           </div>
           <div class="field">
-            希望コース
+            参加する会
             <div class="chip-group" style="margin-top:4px">
-              <button type="button" class="chip on" data-level="初級者向けコース">初級者向け</button>
-              <button type="button" class="chip" data-level="中級者向けコース">中級者向け</button>
+              <button type="button" class="chip on" data-type="勉強合宿">勉強合宿（10〜17時）</button>
+              <button type="button" class="chip" data-type="初心者の会">初心者の会（10〜14時）</button>
+              <button type="button" class="chip" data-type="中級者の会">中級者の会（10〜14時）</button>
             </div>
+          </div>
+          <div class="field" id="plan-field">
+            希望プラン
+            <div class="chip-group" style="margin-top:4px">
+              <button type="button" class="chip on" data-level="SNS投稿の完全自動化">SNS投稿の完全自動化</button>
+              <button type="button" class="chip" data-level="動画生成の自動化">動画生成の自動化</button>
+              <button type="button" class="chip" data-level="iOSアプリのテストリリース">iOSアプリのテストリリース</button>
+              <button type="button" class="chip" data-level="Xリサーチの自動化">Xリサーチの自動化</button>
+              <button type="button" class="chip" data-level="その他">その他</button>
+            </div>
+            <p class="field-note">iOSアプリのプランはMacが必要です。「その他」の方は「作ってみたいもの」に内容を書いてください。</p>
           </div>
           <div class="field">
             希望するAI
@@ -546,19 +578,19 @@ footer{background:var(--dark);color:var(--paper);padding:44px 0;border-top:2px s
           <div class="field offline-only">
             お支払い方法
             <div class="chip-group" style="margin-top:4px">
-              <button type="button" class="chip on" data-payment="当日払い" data-price="2,000円">当日払い</button>
-              <button type="button" class="chip" data-payment="事前払い" data-price="1,800円">事前払い</button>
-              <button type="button" class="chip" data-payment="紹介割（事前払い）" data-price="1,500円">紹介割（事前払い）</button>
+              <button type="button" class="chip on" data-payment="当日払い">当日払い</button>
+              <button type="button" class="chip" data-payment="事前決済">事前決済</button>
+              <button type="button" class="chip" data-payment="友達と2名以上">友達と2名以上</button>
             </div>
-            <p class="field-note">紹介割は事前払い限定です。紹介した方・紹介された方ともに1名1,500円です。事前払い（1,800円）は、申込完了後にStripe（オンライン決済サービス）のお支払いページでお支払いいただきます。紹介割のお支払い方法は、別途ご案内します。</p>
+            <p class="field-note" id="payment-help"></p>
           </div>
           <div class="field offline-only">
-            紹介者のスレッズ名（紹介割の方のみ）<br>
-            <input id="f-referrer" type="text" placeholder="@紹介者のThreads名">
+            一緒に参加する方のお名前（友達と2名以上の方のみ）<br>
+            <input id="f-referrer" type="text" placeholder="例）@friend_threads_name">
           </div>
           <div class="price-row">
             <span id="price-label">参加費（ドリンク付き）／ 当日払い</span>
-            <strong id="price-value">2,000円</strong>
+            <strong id="price-value">3,500円</strong>
           </div>
           <button type="submit" class="form-btn">入力内容を確認する</button>
           <p class="status-msg" id="msg1" aria-live="polite"></p>
@@ -576,9 +608,9 @@ footer{background:var(--dark);color:var(--paper);padding:44px 0;border-top:2px s
         <div style="display:flex;flex-direction:column;gap:14px">
           <div style="font-size:14px;letter-spacing:.18em;font-weight:700">ご確認ください</div>
           <div class="confirm-note">
-            <div id="payment-note">参加費 2,000円（ドリンク付き）は<mark>当日会場でお支払い</mark>です。</div>
-            <div id="venue-note">会場は岡山駅周辺の会議室（仮）。確定した会場と日程は、後日メールでご案内します。</div>
-            <div>ノートPCは必須です。AIサービスのAPI利用料は自己負担となります。</div>
+            <div id="payment-note">参加費 3,500円（ドリンク付き）は<mark>当日会場でお支払い</mark>です。</div>
+            <div id="venue-note">会場はレンタルスペース デルタ岡山（仮）。確定した会場と参加日は、後日メールでご案内します。</div>
+            <div>ノートPCは必須です（iOSプランはMac）。AIサブスク（月額3,000円程度）への事前登録が必要です。昼食は各自でお取りください。</div>
           </div>
           <button type="button" class="form-btn" id="btn-submit">この内容で申し込む</button>
           <button type="button" class="form-btn sec" id="btn-back">入力内容に戻る</button>
@@ -624,7 +656,7 @@ footer{background:var(--dark);color:var(--paper);padding:44px 0;border-top:2px s
       <a href="mailto:degitail647@gmail.com" class="footer-email">degitail647@gmail.com</a>
     </div>
     <div class="footer-detail">
-      Claude Code &amp; Codex を学ぶ会 in 岡山<br>
+      Claude Code &amp; Codex 勉強合宿 in 岡山<br>
       <span id="footer-dates"></span>
     </div>
   </div>
@@ -635,9 +667,10 @@ footer{background:var(--dark);color:var(--paper);padding:44px 0;border-top:2px s
 // 開催日程はここだけを編集する（日程カード・予約チップ・ヒーロー・フッターの表示をすべてここから生成）
 // accepting:false の回はカードに「終了」等の status を表示し、予約チップには出さない
 const EVENTS = [
-  {date:'2026-10-04',label:'10月4日（日）',formLabel:'10/4（日）',time:'10:00〜14:00ごろ',capacity:6,status:'終了',accepting:false},
-  {date:'2026-10-18',label:'10月18日（日）',formLabel:'10/18（日）',time:'10:00〜14:00ごろ',capacity:6,remaining:3,accepting:true},
-  {date:'2026-10-25',label:'10月25日（日）',formLabel:'10/25（日）',time:'10:00〜14:00ごろ',capacity:6,remaining:6,accepting:true},
+  {date:'2026-10-31',label:'10月31日（土）',formLabel:'10/31（土）',time:'勉強合宿 10:00〜17:00／初心者・中級者の会 10:00〜14:00',capacity:6,remaining:6,accepting:true},
+  {date:'2026-11-14',label:'11月14日（土）',formLabel:'11/14（土）',time:'勉強合宿 10:00〜17:00／初心者・中級者の会 10:00〜14:00',capacity:6,remaining:6,accepting:true},
+  {date:'2026-11-21',label:'11月21日（土）',formLabel:'11/21（土）',time:'勉強合宿 10:00〜17:00／初心者・中級者の会 10:00〜14:00',capacity:6,remaining:6,accepting:true},
+  {date:'2026-11-29',label:'11月29日（日）',formLabel:'11/29（日）',time:'勉強合宿 10:00〜17:00／初心者・中級者の会 10:00〜14:00',capacity:6,remaining:6,accepting:true},
 ];
 const OPEN_EVENTS = EVENTS.filter(e=>e.accepting&&e.remaining>0);
 
@@ -660,17 +693,17 @@ EVENTS.forEach(e=>{
 });
 // ponytail: 時間・定員は先頭の受付中の回で代表させる。回ごとに違う設定にするならここを分ける
 const summary=OPEN_EVENTS.length
-  ? `${OPEN_EVENTS.map(e=>e.formLabel.replace(/（.+）/,'')).join('・')}　各日${OPEN_EVENTS[0].time}`
+  ? `${OPEN_EVENTS.map(e=>e.formLabel.replace(/（.+）/,'')).join('・')}　勉強合宿 10:00〜17:00／初心者・中級者の会 10:00〜14:00`
   : '受付中の日程はありません';
 document.getElementById('hero-dates').append(summary);
 document.getElementById('hero-capacity').textContent=OPEN_EVENTS.length
   ? `各回${OPEN_EVENTS[0].capacity}名`
   : '受付終了';
 document.getElementById('date-help').textContent=OPEN_EVENTS.length
-  ? `複数選べます。各日${OPEN_EVENTS[0].time}／定員${OPEN_EVENTS[0].capacity}名。確定後にメールでご連絡します。`
+  ? `参加はいずれか1日です。都合のよい日を複数選べます。定員${OPEN_EVENTS[0].capacity}名。確定後にメールでご連絡します。`
   : '現在受付中の日程はありません。';
 document.getElementById('footer-dates').textContent=OPEN_EVENTS.length
-  ? `${summary.replace('　',' ')} ／ 岡山駅周辺の会議室（仮）／ 各回${OPEN_EVENTS[0].capacity}名`
+  ? `${summary.replace('　',' ')} ／ レンタルスペース デルタ岡山（仮）／ 各回${OPEN_EVENTS[0].capacity}名`
   : summary;
 
 // ── 送信先 ──
@@ -681,25 +714,31 @@ const FORMSPREE_URL = 'https://formspree.io/f/xaeyvyaa';
 // ── Stripe Payment Links（事前払い）──
 // Stripeダッシュボードで作った公開URL（https://buy.stripe.com/…）だけを貼る。秘密鍵（sk_…）やWebhookシークレットは絶対に書かない（手順は README.md）
 // 空欄・不正なURLなら自動移動せず、「お支払い方法は別途メールでご案内」と表示する
-const STRIPE_LINK_PREPAID_1800 = 'https://buy.stripe.com/28E9AU4BX1Fj1IS8gY3Ru01';   // 事前払い 1,800円
-const STRIPE_LINK_REFERRAL_1500 = '';  // 紹介割（事前払い）1,500円
+const STRIPE_LINK_PREPAID_3000 = 'https://buy.stripe.com/cNi5kE7O9es50EOfJq3Ru04';   // 勉強合宿 事前決済 3,000円（チラシのQRコードと同じリンク）
+const STRIPE_LINK_PREPAID_1800 = 'https://buy.stripe.com/28E9AU4BX1Fj1IS8gY3Ru01';   // 初心者の会・中級者の会 事前決済 1,800円
+
+// 参加する会ごとの時間と料金（ここを編集すれば表示・申込・決済リンクがすべて変わる）
+const TYPES = {
+  '勉強合宿':{time:'10:00〜17:00',prices:{'当日払い':'3,500円','事前決済':'3,000円','友達と2名以上':'2,800円'},stripe:STRIPE_LINK_PREPAID_3000},
+  '初心者の会':{time:'10:00〜14:00',prices:{'当日払い':'2,000円','事前決済':'1,800円','友達と2名以上':'1,800円'},stripe:STRIPE_LINK_PREPAID_1800},
+  '中級者の会':{time:'10:00〜14:00',prices:{'当日払い':'2,000円','事前決済':'1,800円','友達と2名以上':'1,800円'},stripe:STRIPE_LINK_PREPAID_1800},
+};
 const STRIPE_REDIRECT_DELAY_MS = 1500;
-const STRIPE_LINKS = {'事前払い':STRIPE_LINK_PREPAID_1800,'紹介割（事前払い）':STRIPE_LINK_REFERRAL_1500};
 let stripeTimer = null;
 
 // https://buy.stripe.com/… の形なら正規化したURL、それ以外は ''
 function stripeLinkFor(payment){
   try{
-    const u=new URL(STRIPE_LINKS[payment]);
+    const u=new URL(payment==='事前決済'?TYPES[s.type].stripe:'');
     return u.protocol==='https:'&&u.hostname==='buy.stripe.com'&&!u.port&&u.pathname.length>1 ? u.href : '';
   }catch{ return ''; }
 }
 
 // ── フォーム状態 ──
 const s = {
-  name:'',email:'',level:'初級者向けコース',ai:'Claude Code',dates:[],
+  name:'',email:'',type:'勉強合宿',plan:'SNS投稿の完全自動化',level:'',ai:'Claude Code',dates:[],
   experience:'まったくの未経験',idea:'',note:'',
-  payment:'当日払い',price:'2,000円',referrer:'',
+  payment:'当日払い',price:'3,500円',referrer:'',
   participationMode:'オフライン（岡山会場）',onlinePreferredDatetime:''
 };
 const ONLINE='オンライン';
@@ -711,6 +750,23 @@ function modeValues(){
   return isOnline()
     ? {dates:'',payment:ONLINE_PRICE,price:ONLINE_PRICE,referrer:'',onlinePreferredDatetime:s.onlinePreferredDatetime}
     : {dates:s.dates.join('・'),payment:s.payment,price:s.price,referrer:s.referrer,onlinePreferredDatetime:''};
+}
+
+// 参加する会の表示（スプレッドシートの「コース」列には「勉強合宿：プラン名」または会の名前を入れる）
+function levelText(){ return s.type==='勉強合宿'?`勉強合宿：${s.plan}`:s.type; }
+function applyType(){
+  const t=TYPES[s.type];
+  s.price=t.prices[s.payment];
+  document.querySelectorAll('[data-type]').forEach(b=>b.classList.toggle('on',b.dataset.type===s.type));
+  // .field は display:flex なので hidden 属性だけでは消えない。style で切り替える
+  document.getElementById('plan-field').style.display=s.type==='勉強合宿'?'':'none';
+  document.querySelectorAll('[data-payment]').forEach(b=>{
+    const p=t.prices[b.dataset.payment];
+    b.textContent=`${b.dataset.payment}（${p}${b.dataset.payment==='友達と2名以上'?'/人':''}）`;
+  });
+  document.getElementById('payment-help').textContent=
+    `${s.type}（${t.time}）の参加費です。事前決済（${t.prices['事前決済']}）は、申込完了後にStripe（オンライン決済サービス）のお支払いページでお支払いいただきます。事前決済は開催日の前日までです。友達と2名以上で参加する場合は1名${t.prices['友達と2名以上']}で、お支払い方法は別途ご案内します。`;
+  updatePrice();
 }
 
 function updatePrice(){
@@ -736,6 +792,7 @@ function applyMode(){
 document.querySelectorAll('input[name="mode"]').forEach(r=>{
   r.onchange=()=>{ s.participationMode=r.value; document.getElementById('msg1').textContent=''; applyMode(); };
 });
+applyType();
 applyMode(); // ブラウザがラジオの選択を復元しても、表示と状態をオフラインにそろえる
 
 // ── 日程チップ生成 ──
@@ -756,9 +813,12 @@ OPEN_EVENTS.forEach(e=>{
 });
 
 // ── 受講レベル・使用AI・支払い方法 ──
+document.querySelectorAll('[data-type]').forEach(btn=>{
+  btn.onclick=()=>{ s.type=btn.dataset.type; applyType(); };
+});
 document.querySelectorAll('[data-level]').forEach(btn=>{
   btn.onclick=()=>{
-    s.level=btn.dataset.level;
+    s.plan=btn.dataset.level;
     document.querySelectorAll('[data-level]').forEach(b=>b.classList.toggle('on',b===btn));
   };
 });
@@ -771,9 +831,8 @@ document.querySelectorAll('[data-ai]').forEach(btn=>{
 document.querySelectorAll('[data-payment]').forEach(btn=>{
   btn.onclick=()=>{
     s.payment=btn.dataset.payment;
-    s.price=btn.dataset.price;
     document.querySelectorAll('[data-payment]').forEach(b=>b.classList.toggle('on',b===btn));
-    updatePrice();
+    applyType();
   };
 });
 
@@ -808,16 +867,21 @@ document.getElementById('form1').onsubmit=e=>{
     return;
   }
   onlineDt.removeAttribute('aria-invalid');
-  if(!isOnline()&&s.payment==='紹介割（事前払い）'&&!s.referrer){
-    document.getElementById('msg1').textContent='紹介割を選んだ方は、紹介者のスレッズ名を入力してください。';
+  if(!isOnline()&&s.payment==='友達と2名以上'&&!s.referrer){
+    document.getElementById('msg1').textContent='友達と2名以上で参加する方は、一緒に参加する方のお名前を入力してください。';
+    return;
+  }
+  s.level=levelText();
+  if(s.type==='勉強合宿'&&s.plan==='その他'&&!s.idea){
+    document.getElementById('msg1').textContent='「その他」を選んだ方は、作ってみたいものを入力してください。';
     return;
   }
   // 確認テーブル
   const m=modeValues();
   const modeRows=isOnline()
     ? [['希望日程',m.onlinePreferredDatetime],['支払い',ONLINE_PRICE]]
-    : [['希望日程',m.dates||'（未選択）'],['支払い',`${m.payment}（${m.price}）`],['紹介者',m.referrer||'（該当なし）']];
-  const rows=[['参加方法',s.participationMode],['スレッズ名',s.name],['メール',s.email],['コース',s.level],['希望AI',s.ai],
+    : [['希望日程',m.dates||'（未選択）'],['支払い',`${m.payment}（${m.price}）`],['同行者',m.referrer||'（該当なし）']];
+  const rows=[['参加方法',s.participationMode],['スレッズ名',s.name],['メール',s.email],['参加する会',s.level],['希望AI',s.ai],
     ...modeRows,['AI経験',s.experience],['作りたいもの',s.idea||'（未記入）'],['質問・要望',s.note||'（未記入）']];
   const ct=document.getElementById('confirm-table');
   ct.innerHTML=rows.map(([k,v])=>`<div class="confirm-key">${k}</div><div style="overflow-wrap:anywhere">${v}</div>`).join('');
@@ -826,15 +890,15 @@ document.getElementById('form1').onsubmit=e=>{
     : '<mark>お支払い方法をメールでご案内</mark>します。';
   const paymentText=isOnline()
     ? `オンライン参加の参加費・お支払い方法は<mark>${ONLINE_PRICE}</mark>します。`
-    : s.payment==='事前払い'
-    ? `参加費 ${s.price}（ドリンク付き）の事前払いです。${prepaidHow}`
-    : s.payment==='紹介割（事前払い）'
-      ? `参加費は紹介した方・紹介された方ともに事前払いで1名1,500円です。${prepaidHow}`
+    : s.payment==='事前決済'
+    ? `参加費 ${s.price}（ドリンク付き）の事前決済です。事前決済は開催日の前日までです。${prepaidHow}`
+    : s.payment==='友達と2名以上'
+      ? `友達と2名以上で参加する場合、参加費は1名${s.price}（ドリンク付き）です。<mark>お支払い方法は別途メールでご案内</mark>します。`
       : `参加費 ${s.price}（ドリンク付き）は<mark>当日会場でお支払い</mark>です。`;
   document.getElementById('payment-note').innerHTML=paymentText;
   document.getElementById('venue-note').textContent=isOnline()
     ? 'ご希望の日程をもとに調整し、オンラインの開催日時と接続方法を後日メールでご案内します。'
-    : '会場は岡山駅周辺の会議室（仮）。確定した会場と日程は、後日メールでご案内します。';
+    : '会場はレンタルスペース デルタ岡山（仮）。確定した会場と参加日は、後日メールでご案内します。';
   // 申込ID：確認画面ごとに1つ。再送信しても同じIDなのでシート側で二重登録を防げる
   s.submissionId=`${Date.now()}_${Math.random().toString(36).slice(2,9)}`;
   showStep(2);
@@ -856,7 +920,7 @@ document.getElementById('btn-submit').onclick=async()=>{
     name:s.name,email:s.email,level:s.level,ai:s.ai,
     participationMode:s.participationMode,
     onlinePreferredDatetime:m.onlinePreferredDatetime,
-    // 現行のシート受信スクリプトは既知の列しか書かないため、オンラインの希望日程は「希望日程」列にも入れる
+    // 「コース」列には勉強合宿のプランを入れる。現行のシート受信スクリプトは既知の列しか書かないため、オンラインの希望日程は「希望日程」列にも入れる
     dates:isOnline()?`オンライン希望日程：${m.onlinePreferredDatetime}`:(m.dates||'（未選択）'),
     experience:s.experience,payment:m.payment,price:m.price,referrer:m.referrer,
     idea:s.idea||'',note:s.note||'',
@@ -926,11 +990,11 @@ function completeStep(){
   document.getElementById('s3-name').textContent=`${s.name} さま、ありがとうございます。`;
   document.getElementById('s3-body').textContent=isOnline()
     ? `お申込みを受け付けました。ご希望の日程をもとに、オンラインの開催日時・接続方法・参加費のお支払い方法を ${s.email} 宛にご案内します。`
-    : `お申込みを受け付けました。確定した日程・会場（岡山駅周辺の会議室）・事前準備のご案内を ${s.email} 宛にお送りします。`+
+    : `お申込みを受け付けました。確定した参加日・会場（レンタルスペース デルタ岡山）・事前準備のご案内を ${s.email} 宛にお送りします。`+
       (prepaid&&!payLink?'参加費のお支払い方法は、別途メールでご案内します。':'');
   document.getElementById('s3-meta').innerHTML=
     `<div class="k">参加方法</div><div>${s.participationMode}</div>`+
-    `<div class="k">コース</div><div>${s.level}</div>`+
+    `<div class="k">参加する会</div><div>${s.level}</div>`+
     `<div class="k">希望AI</div><div>${s.ai}</div>`+
     (isOnline()
       ? `<div class="k">希望日程</div><div style="overflow-wrap:anywhere">${m.onlinePreferredDatetime}</div>`+
@@ -952,10 +1016,11 @@ function completeStep(){
 
 document.getElementById('btn-reset').onclick=()=>{
   clearTimeout(stripeTimer);
-  s.name='';s.email='';s.level='初級者向けコース';s.ai='Claude Code';s.dates=[];
+  s.name='';s.email='';s.type='勉強合宿';s.plan='SNS投稿の完全自動化';s.level='';s.ai='Claude Code';s.dates=[];
   s.experience='まったくの未経験';s.idea='';s.note='';
-  s.payment='当日払い';s.price='2,000円';s.referrer='';
+  s.payment='当日払い';s.price='3,500円';s.referrer='';
   s.participationMode='オフライン（岡山会場）';s.onlinePreferredDatetime='';
+  applyType();
   document.getElementById('f-name').value='';
   document.getElementById('f-email').value='';
   document.getElementById('f-idea').value='';
