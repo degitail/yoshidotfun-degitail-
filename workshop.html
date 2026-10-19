@@ -19,6 +19,8 @@ body{font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',Mei
   color:var(--ink);background:var(--paper);line-height:1.8;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
 img{display:block;max-width:100%}
+/* .field などの display 指定より hidden を優先する */
+[hidden]{display:none!important}
 
 /* ── HEADER ── */
 header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
@@ -430,7 +432,7 @@ footer{background:var(--dark);color:var(--paper);padding:44px 0;border-top:2px s
         <p class="price-detail">お申込み完了後、Stripe（オンライン決済サービス）のお支払いページからお支払いください。事前決済は開催日の前日までです。</p>
       </div>
     </div>
-    <p class="course-note" style="margin-top:14px">＊ 参加費はドリンク代込みです。上記は岡山会場（オフライン）の参加費です。オンライン参加の参加費・お支払い方法は別途ご案内します。</p>
+    <p class="course-note" style="margin-top:14px">＊ 参加費はドリンク代込みです。上記は岡山会場（オフライン）の参加費です。オンライン参加は、事前決済2,000円／友達と2名以上で1,500円/人です（お支払い方法は申込後にメールでご案内します）。</p>
   </div>
 </section>
 
@@ -524,7 +526,7 @@ footer{background:var(--dark);color:var(--paper);padding:44px 0;border-top:2px s
             メールアドレス<br>
             <input id="f-email" type="email" placeholder="you@example.com" required>
           </div>
-          <div class="field">
+          <div class="field offline-only">
             参加する会
             <div class="chip-group" style="margin-top:4px">
               <button type="button" class="chip on" data-type="勉強合宿">勉強合宿（10〜17時）</button>
@@ -575,7 +577,7 @@ footer{background:var(--dark);color:var(--paper);padding:44px 0;border-top:2px s
             質問・要望<br>
             <textarea id="f-note" rows="3" placeholder="当日までに聞いておきたいことがあれば"></textarea>
           </div>
-          <div class="field offline-only">
+          <div class="field">
             お支払い方法
             <div class="chip-group" style="margin-top:4px">
               <button type="button" class="chip on" data-payment="当日払い">当日払い</button>
@@ -584,7 +586,7 @@ footer{background:var(--dark);color:var(--paper);padding:44px 0;border-top:2px s
             </div>
             <p class="field-note" id="payment-help"></p>
           </div>
-          <div class="field offline-only">
+          <div class="field">
             一緒に参加する方のお名前（友達と2名以上の方のみ）<br>
             <input id="f-referrer" type="text" placeholder="例）@friend_threads_name">
           </div>
@@ -742,36 +744,45 @@ const s = {
   participationMode:'オフライン（岡山会場）',onlinePreferredDatetime:''
 };
 const ONLINE='オンライン';
-const ONLINE_PRICE='別途ご案内';
+// オンライン参加の料金（当日払いはなし）
+const ONLINE_PRICES={'事前決済':'2,000円','友達と2名以上':'1,500円'};
 const isOnline=()=>s.participationMode===ONLINE;
 
 // 参加方法ごとに使う値。もう一方のモードの入力値は混ぜない
 function modeValues(){
   return isOnline()
-    ? {dates:'',payment:ONLINE_PRICE,price:ONLINE_PRICE,referrer:'',onlinePreferredDatetime:s.onlinePreferredDatetime}
+    ? {dates:'',payment:s.payment,price:s.price,referrer:s.referrer,onlinePreferredDatetime:s.onlinePreferredDatetime}
     : {dates:s.dates.join('・'),payment:s.payment,price:s.price,referrer:s.referrer,onlinePreferredDatetime:''};
 }
 
 // 参加する会の表示（スプレッドシートの「コース」列には「勉強合宿：プラン名」または会の名前を入れる）
-function levelText(){ return s.type==='勉強合宿'?`勉強合宿：${s.plan}`:s.type; }
+function levelText(){ return isOnline()?ONLINE:s.type==='勉強合宿'?`勉強合宿：${s.plan}`:s.type; }
 function applyType(){
-  const t=TYPES[s.type];
+  const online=isOnline();
+  if(online&&s.payment==='当日払い') s.payment='事前決済';
+  const t=online?{prices:ONLINE_PRICES}:TYPES[s.type];
   s.price=t.prices[s.payment];
+  document.querySelectorAll('[data-payment]').forEach(b=>{
+    b.hidden=!t.prices[b.dataset.payment];
+    b.classList.toggle('on',b.dataset.payment===s.payment);
+  });
   document.querySelectorAll('[data-type]').forEach(b=>b.classList.toggle('on',b.dataset.type===s.type));
   // .field は display:flex なので hidden 属性だけでは消えない。style で切り替える
-  document.getElementById('plan-field').style.display=s.type==='勉強合宿'?'':'none';
+  document.getElementById('plan-field').style.display=!online&&s.type==='勉強合宿'?'':'none';
   document.querySelectorAll('[data-payment]').forEach(b=>{
     const p=t.prices[b.dataset.payment];
+    if(!p) return;
     b.textContent=`${b.dataset.payment}（${p}${b.dataset.payment==='友達と2名以上'?'/人':''}）`;
   });
-  document.getElementById('payment-help').textContent=
-    `${s.type}（${t.time}）の参加費です。事前決済（${t.prices['事前決済']}）は、申込完了後にStripe（オンライン決済サービス）のお支払いページでお支払いいただきます。事前決済は開催日の前日までです。友達と2名以上で参加する場合は1名${t.prices['友達と2名以上']}で、お支払い方法は別途ご案内します。`;
+  document.getElementById('payment-help').textContent=online
+    ? `オンライン参加の参加費です。事前決済は${t.prices['事前決済']}、友達と2名以上で参加する場合は1名${t.prices['友達と2名以上']}です。お支払い方法は申込後にメールでご案内します。`
+    : `${s.type}（${t.time}）の参加費です。事前決済（${t.prices['事前決済']}）は、申込完了後にStripe（オンライン決済サービス）のお支払いページでお支払いいただきます。事前決済は開催日の前日までです。友達と2名以上で参加する場合は1名${t.prices['友達と2名以上']}で、お支払い方法は別途ご案内します。`;
   updatePrice();
 }
 
 function updatePrice(){
-  document.getElementById('price-label').textContent=isOnline()?'参加費 ／ オンライン':`参加費（ドリンク付き）／ ${s.payment}`;
-  document.getElementById('price-value').textContent=isOnline()?ONLINE_PRICE:s.price;
+  document.getElementById('price-label').textContent=isOnline()?`参加費 ／ オンライン・${s.payment}`:`参加費（ドリンク付き）／ ${s.payment}`;
+  document.getElementById('price-value').textContent=s.price+(s.payment==='友達と2名以上'?'/人':'');
 }
 
 // ── 参加方法：オフライン項目／オンライン項目の表示切り替え ──
@@ -787,7 +798,7 @@ function applyMode(){
     r.checked=r.value===s.participationMode;
     r.parentElement.classList.toggle('on',r.checked);
   });
-  updatePrice();
+  applyType();
 }
 document.querySelectorAll('input[name="mode"]').forEach(r=>{
   r.onchange=()=>{ s.participationMode=r.value; document.getElementById('msg1').textContent=''; applyMode(); };
@@ -858,7 +869,7 @@ document.getElementById('form1').onsubmit=e=>{
   s.idea=document.getElementById('f-idea').value.trim();
   s.note=document.getElementById('f-note').value.trim();
   // 非表示側の入力は読まない（もう一方のモードの値を持ち越さない）
-  s.referrer=isOnline()?'':document.getElementById('f-referrer').value.trim();
+  s.referrer=document.getElementById('f-referrer').value.trim();
   s.onlinePreferredDatetime=isOnline()?onlineDt.value.trim():'';
   if(isOnline()&&!s.onlinePreferredDatetime){
     document.getElementById('msg1').textContent='オンライン参加の方は、希望日程を入力してください。';
@@ -867,19 +878,19 @@ document.getElementById('form1').onsubmit=e=>{
     return;
   }
   onlineDt.removeAttribute('aria-invalid');
-  if(!isOnline()&&s.payment==='友達と2名以上'&&!s.referrer){
+  if(s.payment==='友達と2名以上'&&!s.referrer){
     document.getElementById('msg1').textContent='友達と2名以上で参加する方は、一緒に参加する方のお名前を入力してください。';
     return;
   }
   s.level=levelText();
-  if(s.type==='勉強合宿'&&s.plan==='その他'&&!s.idea){
+  if(!isOnline()&&s.type==='勉強合宿'&&s.plan==='その他'&&!s.idea){
     document.getElementById('msg1').textContent='「その他」を選んだ方は、作ってみたいものを入力してください。';
     return;
   }
   // 確認テーブル
   const m=modeValues();
   const modeRows=isOnline()
-    ? [['希望日程',m.onlinePreferredDatetime],['支払い',ONLINE_PRICE]]
+    ? [['希望日程',m.onlinePreferredDatetime],['支払い',`${m.payment}（${m.price}${m.payment==='友達と2名以上'?'/人':''}）`],['同行者',m.referrer||'（該当なし）']]
     : [['希望日程',m.dates||'（未選択）'],['支払い',`${m.payment}（${m.price}）`],['同行者',m.referrer||'（該当なし）']];
   const rows=[['参加方法',s.participationMode],['スレッズ名',s.name],['メール',s.email],['参加する会',s.level],['希望AI',s.ai],
     ...modeRows,['AI経験',s.experience],['作りたいもの',s.idea||'（未記入）'],['質問・要望',s.note||'（未記入）']];
@@ -889,7 +900,7 @@ document.getElementById('form1').onsubmit=e=>{
     ? '申込完了後、<mark>Stripe（オンライン決済サービス）のお支払いページ</mark>へ移動します。'
     : '<mark>お支払い方法をメールでご案内</mark>します。';
   const paymentText=isOnline()
-    ? `オンライン参加の参加費・お支払い方法は<mark>${ONLINE_PRICE}</mark>します。`
+    ? `オンライン参加の参加費は${s.payment==='友達と2名以上'?`1名${s.price}（友達と2名以上）`:`${s.price}（事前決済）`}です。<mark>お支払い方法はメールでご案内</mark>します。`
     : s.payment==='事前決済'
     ? `参加費 ${s.price}（ドリンク付き）の事前決済です。事前決済は開催日の前日までです。${prepaidHow}`
     : s.payment==='友達と2名以上'
@@ -998,7 +1009,7 @@ function completeStep(){
     `<div class="k">希望AI</div><div>${s.ai}</div>`+
     (isOnline()
       ? `<div class="k">希望日程</div><div style="overflow-wrap:anywhere">${m.onlinePreferredDatetime}</div>`+
-        `<div class="k">参加費</div><div>${ONLINE_PRICE}</div>`
+        `<div class="k">参加費</div><div>${s.price}（${s.payment}）</div>`
       : `<div class="k">希望日程</div><div>${m.dates||'（未選択）'}</div>`+
         `<div class="k">参加費</div><div>${s.price}（${s.payment}）</div>`);
   document.getElementById('s3-pay').hidden=!payLink;
