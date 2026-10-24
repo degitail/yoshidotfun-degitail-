@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>オンライン講座 | degitail</title>
+<meta name="description" content="AIセットアップ、SNS自動化、動画生成、アプリ制作など、分野をしぼって学べるdegitailのオンライン講座。マンツーマンまたは少人数で、90分で使えるところまで進めます。">
+<link rel="icon" href="icon.png" type="image/png">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#111111;--ink:#1d1d1d;--gray-9:#2b2b2b;
+  --gray-6:#6b6b6b;--gray-4:#9a9a9a;--gray-2:#d8d8d8;
+  --gray-1:#ececec;--paper:#ffffff;--bg:#fafafa;--line:#e3e3e3;
+  --dark:#201f1d;--dark-mid:#2e2c2a;--muted:#bab6b6;--dim:#605d5d;
+  --red:#e5262f;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',Meiryo,sans-serif;
+  color:var(--ink);background:var(--paper);line-height:1.8;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+[hidden]{display:none!important}
+
+/* ── HEADER（workshop.html と同じ） ── */
+header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.header-inner{max-width:1080px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:72px;padding:0 32px}
+.logo-clip{width:116px;height:66px;overflow:hidden;position:relative;flex-shrink:0}
+.logo-img{width:116px;position:absolute;top:-66px;left:0}
+.logo-text{font-size:1.1rem;font-weight:700;letter-spacing:.04em;color:var(--dark)}
+nav{display:flex;gap:28px;align-items:center}
+@media(max-width:900px){nav.main-nav{gap:18px}}
+nav a{font-size:.82rem;letter-spacing:.08em;color:var(--gray-6);text-transform:uppercase;transition:color .2s}
+nav a:hover{color:var(--black)}
+nav a.active{color:var(--black);font-weight:700}
+nav .nav-cta{border:1px solid var(--black);color:var(--black);padding:8px 20px;letter-spacing:.06em;transition:background .2s,color .2s}
+nav .nav-cta:hover{background:var(--black);color:var(--paper)}
+.hamburger{display:none;background:none;border:none;cursor:pointer;padding:4px;flex-direction:column;gap:5px}
+.hamburger span{display:block;width:22px;height:2px;background:var(--dark)}
+.mobile-nav{display:none;position:fixed;inset:72px 0 0;background:var(--paper);z-index:99;flex-direction:column;padding:24px 32px;gap:20px;border-top:1px solid var(--line)}
+.mobile-nav.open{display:flex}
+.mobile-nav a{font-size:1rem;letter-spacing:.06em;color:var(--gray-6);text-transform:uppercase;padding:8px 0;border-bottom:1px solid var(--line)}
+
+/* ── 共通 ── */
+.s-dark{background:var(--dark);color:var(--paper)}
+.s-light{background:var(--paper);color:var(--dark)}
+.s-gray{background:var(--bg);color:var(--dark)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 32px}
+.sec{padding-top:64px;padding-bottom:64px}
+.sec-eyebrow{font-size:.76rem;letter-spacing:.26em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.s-light .sec-eyebrow,.s-gray .sec-eyebrow{color:var(--dim)}
+.sec h2{font-size:clamp(22px,3vw,32px);font-weight:700;border-bottom:2px solid var(--dark);padding-bottom:12px;margin-bottom:28px}
+.cta-btn{display:inline-block;background:var(--paper);color:var(--dark);font-size:17px;font-weight:700;letter-spacing:.08em;padding:15px 44px;border:2px solid var(--paper);transition:background .2s,color .2s;cursor:pointer;font-family:inherit}
+.cta-btn:hover{background:var(--dark);color:var(--paper)}
+.cta-btn.dark{background:var(--dark);color:var(--paper);border-color:var(--dark)}
+.cta-btn.dark:hover{background:var(--paper);color:var(--dark)}
+
+/* ── HERO ── */
+.hero{padding-top:72px;padding-bottom:80px}
+.hero-eyebrow{font-size:.76rem;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);margin-bottom:24px}
+.hero h1{font-size:clamp(30px,5.5vw,58px);font-weight:700;line-height:1.25;margin-bottom:22px}
+.hero h1 em{font-style:normal;border-bottom:6px solid var(--red)}
+.hero-lead{font-size:clamp(17px,2.2vw,24px);line-height:1.55;background:var(--paper);color:var(--dark);padding:14px 20px;display:inline-block;margin-bottom:24px;max-width:720px}
+.hero-body{font-size:15px;line-height:1.95;max-width:680px;margin-bottom:32px}
+.hero-meta{display:flex;flex-wrap:wrap;gap:10px 28px;font-size:15px;border-top:2px solid var(--paper);padding-top:20px;margin-bottom:36px}
+.hero-meta span:first-child{color:var(--muted);margin-right:10px;font-size:13px;letter-spacing:.08em}
+
+/* ── 料金 ── */
+.price-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.price-card{border:2px solid var(--dark);padding:26px 28px;background:var(--paper)}
+.price-card.rec{border-color:var(--red)}
+.price-tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.1em;background:var(--red);color:var(--paper);padding:2px 10px;margin-bottom:10px}
+.price-name{font-size:19px;font-weight:700}
+.price-num{font-size:34px;font-weight:700;margin:6px 0 4px}
+.price-num small{font-size:15px;font-weight:400;margin-left:4px}
+.price-desc{font-size:14px;color:var(--dim);line-height:1.8}
+.note{font-size:13px;color:var(--dim);margin-top:14px;line-height:1.8}
+
+/* ── 講座一覧 ── */
+.lec-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:28px}
+.lec{border:1px solid var(--line);background:var(--paper);display:flex;flex-direction:column}
+.lec img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;background:var(--dark)}
+.lec-body{padding:20px 22px 22px;display:flex;flex-direction:column;flex:1}
+.lec-num{font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--red)}
+.lec h3{font-size:19px;line-height:1.45;margin:2px 0 8px}
+.lec p{font-size:14px;line-height:1.85;color:var(--gray-9)}
+.lec ul{list-style:none;margin:12px 0 16px;display:grid;gap:4px}
+.lec li{font-size:13.5px;line-height:1.7;padding-left:18px;position:relative}
+.lec li::before{content:'';position:absolute;left:0;top:.72em;width:8px;height:2px;background:var(--red)}
+.lec-for{font-size:12.5px;color:var(--dim);margin-bottom:16px}
+.lec-btn{margin-top:auto;background:var(--dark);color:var(--paper);border:2px solid var(--dark);padding:11px 16px;font-size:14px;font-weight:700;letter-spacing:.06em;cursor:pointer;font-family:inherit;transition:background .2s,color .2s}
+.lec-btn:hover{background:var(--paper);color:var(--dark)}
+
+/* ── 流れ ── */
+.flow{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;counter-reset:f}
+.flow li{border-top:2px solid var(--dark);padding-top:14px;font-size:14px;line-height:1.8;counter-increment:f}
+.flow li::before{content:'STEP ' counter(f);display:block;font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--red);margin-bottom:4px}
+.flow strong{display:block;font-size:16px}
+
+/* ── FORM ── */
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px 28px;border:2px solid var(--dark);padding:28px;background:var(--paper)}
+.field{display:flex;flex-direction:column;gap:8px}
+.field.full{grid-column:1/-1}
+.field label,.field legend{font-size:14px;font-weight:700}
+.req{font-size:11px;background:var(--dark);color:var(--paper);padding:1px 7px;margin-left:8px;font-weight:700;vertical-align:2px}
+.field input[type=text],.field input[type=email],.field select,.field textarea{font:inherit;font-size:16px;border:1px solid var(--gray-2);padding:11px 12px;background:var(--paper);color:var(--ink);border-radius:0;width:100%}
+.field textarea{min-height:96px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{outline:2px solid var(--dark);outline-offset:-1px}
+.field-note{font-size:12.5px;color:var(--dim);line-height:1.7}
+fieldset{border:none}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{display:flex;align-items:center;gap:8px;border:1px solid var(--gray-2);padding:10px 14px;font-size:14.5px;cursor:pointer}
+.chip:has(input:checked){border-color:var(--dark);background:var(--dark);color:var(--paper)}
+.chip input{accent-color:var(--red)}
+.form-actions{grid-column:1/-1;display:grid;gap:10px}
+.form-btn{background:var(--dark);color:var(--paper);border:2px solid var(--dark);padding:15px 20px;font-size:16px;font-weight:700;letter-spacing:.08em;cursor:pointer;font-family:inherit;width:100%}
+.form-btn:hover{background:var(--paper);color:var(--dark)}
+.form-btn:disabled{opacity:.6;cursor:wait}
+.form-msg{font-size:14px;color:#c00;min-height:1em}
+.done{border:2px solid var(--dark);padding:32px 28px;background:var(--paper)}
+.done h3{font-size:22px;margin-bottom:10px}
+.done p{font-size:15px;line-height:1.9}
+.spinner{display:inline-block;width:14px;height:14px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:spin .8s linear infinite;margin-right:8px;vertical-align:-2px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ── FAQ ── */
+.faq-list details{border-bottom:1px solid var(--line);padding:16px 0}
+.faq-list summary{font-weight:700;cursor:pointer;font-size:15.5px}
+.faq-list p{font-size:14.5px;margin-top:8px;color:var(--gray-9)}
+
+/* ── FOOTER ── */
+footer{background:var(--dark);color:var(--paper);padding:44px 0;border-top:2px solid var(--paper)}
+.footer-inner{max-width:1080px;margin:0 auto;padding:0 32px;display:flex;flex-wrap:wrap;gap:16px 40px;align-items:baseline;justify-content:space-between}
+.footer-name{font-weight:700;letter-spacing:.06em}
+.footer-email{font-size:14px;color:var(--muted)}
+.footer-detail{font-size:13px;color:var(--muted);line-height:1.8}
+.footer-detail a{text-decoration:underline}
+
+@media(max-width:720px){
+  .main-nav{display:none}
+  .hamburger{display:flex}
+  .header-inner{padding:0 20px}
+  .wrap{padding:0 20px}
+  .sec{padding-top:48px;padding-bottom:48px}
+  .hero{padding-top:52px;padding-bottom:60px}
+  .cta-btn{padding:14px 28px;width:100%;text-align:center}
+  .form-grid{padding:20px}
+  .lec-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a href="index.html" style="display:flex;align-items:center;gap:10px">
+      <div class="logo-clip">
+        <img class="logo-img" src="top.png" alt="degitail"
+             onerror="this.parentElement.style.display='none';document.getElementById('logo-txt').style.display='block'">
+      </div>
+      <span id="logo-txt" class="logo-text" style="display:none">degitail</span>
+    </a>
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="personal.html">個人向け</a>
+      <a href="business.html">法人向け</a>
+      <a href="workshop.html" class="active">勉強会</a>
+      <a href="profile.html">プロフィール</a>
+      <a href="https://degitail.github.io/yoshi-portfolio/" target="_blank" rel="noopener">ポートフォリオ</a>
+      <a href="mailto:degitail647@gmail.com" class="nav-cta">お問い合わせ</a>
+    </nav>
+    <button class="hamburger" id="hmb" aria-label="メニュー">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<div class="mobile-nav" id="mob-nav">
+  <a href="index.html">Home</a>
+  <a href="personal.html">個人向け</a>
+  <a href="business.html">法人向け</a>
+  <a href="workshop.html">勉強会</a>
+  <a href="profile.html">プロフィール</a>
+  <a href="https://degitail.github.io/yoshi-portfolio/" target="_blank" rel="noopener">ポートフォリオ</a>
+  <a href="mailto:degitail647@gmail.com">お問い合わせ</a>
+</div>
+
+<!-- HERO -->
+<section class="s-dark">
+  <div class="wrap hero">
+    <p class="hero-eyebrow">DEGITAIL : KEI ／ ONLINE LECTURE</p>
+    <h1>分野をしぼって学ぶ<br><em>オンライン講座</em></h1>
+    <p class="hero-lead">知りたいことだけを、90分で使えるところまで。</p>
+    <p class="hero-body">AIの全部を学ぶ必要はありません。SNS、動画、アプリ、事務の時短など、いま困っていることに合わせて講座を1つ選んでください。画面を共有しながら、あなたのPCで実際に動くところまで一緒に進めます。</p>
+    <div class="hero-meta">
+      <div><span>形式</span>Zoom（画面共有）</div>
+      <div><span>時間</span>1講座 90分</div>
+      <div><span>受講料</span>90分 2,000円</div>
+    </div>
+    <a href="#lectures" class="cta-btn">講座を選ぶ</a>
+  </div>
+</section>
+
+<!-- LECTURES -->
+<section class="s-gray" id="lectures">
+  <div class="wrap sec">
+    <p class="sec-eyebrow">LECTURES</p>
+    <h2>講座一覧</h2>
+    <div class="lec-grid" id="lec-grid"></div>
+  </div>
+</section>
+
+<!-- PRICE -->
+<section class="s-light" id="price">
+  <div class="wrap sec">
+    <p class="sec-eyebrow">PRICE</p>
+    <h2>受講形式と料金</h2>
+    <p style="font-size:15px;margin:-8px 0 22px">どの講座も、どちらの受講形式でも <strong>90分 2,000円</strong> です。</p>
+    <div class="price-grid">
+      <div class="price-card rec">
+        <span class="price-tag">おすすめ</span>
+        <div class="price-name">マンツーマン</div>
+        <div class="price-num">2,000円<small>／90分</small></div>
+        <p class="price-desc">講師と1対1。あなたのPCとアカウントで、設定から動作確認まで一緒に進めます。日時は相談して決めます。</p>
+      </div>
+      <div class="price-card">
+        <span class="price-tag" style="background:var(--dark)">気軽に</span>
+        <div class="price-name">少人数ライブ</div>
+        <div class="price-num">2,000円<small>／1人・90分</small></div>
+        <p class="price-desc">最大5名で同じ講座を受講します。開催日は申込状況に合わせて決め、メールでご案内します。</p>
+      </div>
+    </div>
+    <p class="note">＊ お支払い方法は、日程が決まったあとにメールでご案内します。<br>＊ 受講にAIの有料プランが必要な講座は、講座説明に記載しています。</p>
+  </div>
+</section>
+
+<!-- FLOW -->
+<section class="s-light">
+  <div class="wrap sec" style="padding-top:0">
+    <p class="sec-eyebrow">FLOW</p>
+    <h2>受講までの流れ</h2>
+    <ol class="flow">
+      <li><strong>申込フォームを送る</strong>講座と受講形式、希望の日時を選んで送信します。</li>
+      <li><strong>日程のご案内</strong>ご希望をもとに日時を決め、お支払い方法とあわせてメールでお知らせします。</li>
+      <li><strong>Zoomで受講</strong>当日はZoomのURLから参加し、画面を共有しながら進めます。</li>
+      <li><strong>そのまま使える</strong>受講中に作った設定やツールは、終わったあともそのまま使い続けられます。</li>
+    </ol>
+  </div>
+</section>
+
+<!-- RESERVE -->
+<section class="s-gray" id="reserve">
+  <div class="wrap sec">
+    <p class="sec-eyebrow">RESERVE</p>
+    <h2>予約フォーム</h2>
+    <form class="form-grid" id="lec-form" novalidate>
+      <div class="field full">
+        <label for="f-lecture">受講したい講座<span class="req">必須</span></label>
+        <select id="f-lecture" required></select>
+      </div>
+      <fieldset class="field full">
+        <legend>受講形式<span class="req">必須</span></legend>
+        <div class="chips">
+          <label class="chip"><input type="radio" name="style" value="マンツーマン" checked>マンツーマン</label>
+          <label class="chip"><input type="radio" name="style" value="少人数ライブ">少人数ライブ</label>
+        </div>
+      </fieldset>
+      <div class="field">
+        <label for="f-name">お名前（ニックネーム可）<span class="req">必須</span></label>
+        <input id="f-name" type="text" maxlength="60" required autocomplete="name">
+      </div>
+      <div class="field">
+        <label for="f-email">メールアドレス<span class="req">必須</span></label>
+        <input id="f-email" type="email" maxlength="120" required autocomplete="email">
+      </div>
+      <div class="field full">
+        <label for="f-dt">希望の日時<span class="req">必須</span></label>
+        <input id="f-dt" type="text" maxlength="200" required placeholder="例）11月5日 20:00〜／平日19時以降／土曜午前">
+        <p class="field-note">候補を複数書いても構いません。少人数ライブの場合は、希望の曜日や時間帯を書いてください。</p>
+      </div>
+      <div class="field">
+        <label for="f-exp">AIの使用経験</label>
+        <select id="f-exp">
+          <option value="使ったことがない">使ったことがない</option>
+          <option value="少し使ったことがある">少し使ったことがある</option>
+          <option value="仕事や趣味でよく使う">仕事や趣味でよく使う</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="f-pc">使うパソコン</label>
+        <select id="f-pc">
+          <option value="Windows">Windows</option>
+          <option value="Mac">Mac</option>
+          <option value="まだ決めていない">まだ決めていない</option>
+        </select>
+      </div>
+      <div class="field full">
+        <label for="f-note">やりたいこと・質問</label>
+        <textarea id="f-note" maxlength="1000" placeholder="例）お店のInstagram投稿を週3回自動にしたい"></textarea>
+      </div>
+      <div class="form-actions">
+        <p class="form-msg" id="form-msg" role="alert"></p>
+        <button type="submit" class="form-btn" id="btn-submit">この内容で予約を申し込む</button>
+      </div>
+    </form>
+    <div class="done" id="done" hidden>
+      <h3>お申し込みを受け付けました</h3>
+      <p id="done-text"></p>
+      <p style="margin-top:12px;font-size:13.5px;color:var(--dim)">数日たってもメールが届かない場合は、迷惑メールフォルダをご確認のうえ、degitail647@gmail.com までご連絡ください。</p>
+      <button type="button" class="form-btn" style="max-width:260px;margin-top:20px" id="btn-again">別の講座も申し込む</button>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="s-light">
+  <div class="wrap sec">
+    <p class="sec-eyebrow">FAQ</p>
+    <h2>よくある質問</h2>
+    <div class="faq-list">
+      <details>
+        <summary>パソコンが苦手でも受講できますか？</summary>
+        <p>はい。「AIセットアップ」はまったく初めての方向けです。Zoomの入り方が不安な方は、申込時の質問欄にご記入ください。事前にご案内します。</p>
+      </details>
+      <details>
+        <summary>AIの有料プランは必要ですか？</summary>
+        <p>講座によります。無料プランで進められる講座もあります。「アプリ制作」のように有料プランが必要な講座は、各講座の説明に書いています。</p>
+      </details>
+      <details>
+        <summary>岡山の勉強会とのちがいは？</summary>
+        <p>岡山の勉強会は、会場で1日かけて1つのものを完成させる会です。オンライン講座は、テーマを1つにしぼって90分で学びます。遠方の方や、平日夜に受けたい方に向いています。</p>
+      </details>
+      <details>
+        <summary>キャンセルはできますか？</summary>
+        <p>受講日の前日までにメールでご連絡ください。日程の変更もできます。</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-name">Degitail : Kei</div>
+      <a href="mailto:degitail647@gmail.com" class="footer-email">degitail647@gmail.com</a>
+    </div>
+    <div class="footer-detail">
+      オンライン講座（Zoom・90分）<br>
+      <a href="workshop.html">岡山で開催する勉強会はこちら</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── 講座データ ──
+// 講座の追加・変更はここだけを編集する（カード・予約フォームの選択肢をここから生成）
+const LECTURES=[
+  {no:'01',img:'01_setup',title:'AIセットアップ',lead:'ChatGPTやClaudeを、今日から使える状態にします。',
+   points:['アカウント作成と、無料・有料プランのちがい','スマホとパソコンの両方で使えるように設定','まずはこれだけ、の質問のしかた'],for:'AIをまだ使ったことがない方'},
+  {no:'02',img:'02_sns',title:'SNS自動化',lead:'投稿文づくりから予約投稿まで、毎日の発信をAIにまかせます。',
+   points:['お店や自分らしい投稿文をAIに書かせるコツ','1週間分の投稿をまとめて作る','予約投稿ツールとの組み合わせ方'],for:'Instagram・X・Threadsを続けたい方'},
+  {no:'03',img:'03_video',title:'動画生成AI',lead:'撮影なしで、リールやショート動画をつくります。',
+   points:['台本をAIで作る','画像・音声・字幕をAIで用意する','1本完成させて書き出すまで'],for:'動画で発信したいが撮影が苦手な方'},
+  {no:'04',img:'04_app',title:'AIでアプリ制作',lead:'Claude CodeやCodexに指示して、自分だけのツールをつくります。',
+   points:['Claude Code／Codexのインストール','日本語で指示してアプリを作る','インターネットに公開するまで'],for:'プログラミング未経験で、ツールを作りたい方（Claude Pro または ChatGPT Plus が必要）'},
+  {no:'05',img:'05_image',title:'画像生成AI',lead:'チラシ・バナー・挿絵を、AIでデザインします。',
+   points:['思いどおりの画像を出すプロンプト','チラシやSNS画像への仕上げ方','商用利用で気をつけること'],for:'チラシや画像を自分で作りたい方'},
+  {no:'06',img:'06_docs',title:'文書作成の時短',lead:'議事録・見積書・提案書の下書きをAIにまかせます。',
+   points:['会議の録音から議事録をつくる','見積書・提案書のたたき台をつくる','社内で使い回せるテンプレートづくり'],for:'事務担当の方・経営者の方'},
+  {no:'07',img:'07_flow',title:'業務自動化',lead:'スプレッドシートとAIを組み合わせ、くり返し作業をなくします。',
+   points:['自動化できる作業の見つけ方','Google Apps Script（GAS）をAIに書かせる','毎日自動で動く仕組みにする'],for:'Googleスプレッドシートを仕事で使っている方'},
+  {no:'08',img:'08_phone',title:'AI電話・予約対応',lead:'電話や予約の受付を、AIが24時間対応する仕組みを学びます。',
+   points:['AI電話でできること・できないこと','予約受付の流れをAIに覚えさせる','導入事例と費用の目安'],for:'店舗・サロン・クリニックを運営している方'},
+  {no:'09',img:'09_review',title:'クチコミ返信・MEO',lead:'Googleマップの評価を、AIの力で育てます。',
+   points:['クチコミへの返信文をAIでつくる','Googleビジネスプロフィールの整え方','クチコミを集める声かけと仕組み'],for:'飲食店・小売店・地域のお店の方'},
+  {no:'10',img:'10_data',title:'AIデータ分析',lead:'売上表をAIに渡して、次の一手を見つけます。',
+   points:['ExcelやCSVをAIに読ませる','グラフを自動でつくる','数字から改善案を出してもらう'],for:'売上や数字を見る機会がある方'},
+];
+
+// ── 講座カードとフォームの選択肢 ──
+const grid=document.getElementById('lec-grid');
+const sel=document.getElementById('f-lecture');
+sel.innerHTML='<option value="">講座を選んでください</option>'+LECTURES.map(l=>`<option value="${l.title}">No.${l.no} ${l.title}</option>`).join('');
+grid.innerHTML=LECTURES.map(l=>`
+  <article class="lec">
+    <img src="lecture-thumbs/${l.img}.png" alt="${l.title}" loading="lazy" width="1920" height="1080">
+    <div class="lec-body">
+      <span class="lec-num">No.${l.no}</span>
+      <h3>${l.title}</h3>
+      <p>${l.lead}</p>
+      <ul>${l.points.map(p=>`<li>${p}</li>`).join('')}</ul>
+      <p class="lec-for">対象：${l.for}</p>
+      <button type="button" class="lec-btn" data-title="${l.title}">この講座を予約する</button>
+    </div>
+  </article>`).join('');
+grid.addEventListener('click',e=>{
+  const b=e.target.closest('.lec-btn'); if(!b) return;
+  sel.value=b.dataset.title;
+  document.getElementById('reserve').scrollIntoView({behavior:'smooth'});
+});
+
+// ── ハンバーガー ──
+document.getElementById('hmb').onclick=()=>document.getElementById('mob-nav').classList.toggle('open');
+
+// ── 送信 ──
+// 勉強会と同じ Google スプレッドシート（申込一覧シート）に記録する。
+// 受信スクリプト（workshop-sheets.gs）は変更せず、既存の列に次のように入れる：
+//   参加方法＝オンライン講座／コース＝講座名／希望AI＝受講形式／希望日程・オンライン希望日時＝希望の日時
+//   AI経験＝経験／支払い方法＝申込後にご案内／参加費＝料金／作りたいもの＝使うパソコン／質問・要望＝やりたいこと
+const SHEETS_URL='https://script.google.com/macros/s/AKfycbxBL3DbWPKHzo1kfZteRtKiiySicALVz_9dsumAsYFMFL3AruftHnBfX01udxYheak_Og/exec';
+const PRICES={'マンツーマン':'2,000円','少人数ライブ':'2,000円'};
+const form=document.getElementById('lec-form');
+const msg=document.getElementById('form-msg');
+const btn=document.getElementById('btn-submit');
+let submissionId='';
+
+form.addEventListener('input',()=>{ submissionId=''; }); // 内容を変えたら別の申込として扱う
+form.onsubmit=async e=>{
+  e.preventDefault();
+  msg.textContent='';
+  const v=id=>document.getElementById(id).value.trim();
+  const style=form.querySelector('input[name=style]:checked').value;
+  if(!v('f-lecture')) return msg.textContent='受講したい講座を選んでください。';
+  if(!v('f-name')) return msg.textContent='お名前を入力してください。';
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v('f-email'))) return msg.textContent='メールアドレスを正しく入力してください。';
+  if(!v('f-dt')) return msg.textContent='希望の日時を入力してください。';
+
+  // 申込ID：同じ内容の再送信ではIDが変わらないので、シート側で二重登録されない
+  if(!submissionId) submissionId=`${Date.now()}_${Math.random().toString(36).slice(2,9)}`;
+  const data={
+    submissionId,
+    participationMode:'オンライン講座',
+    name:v('f-name'),email:v('f-email'),
+    level:v('f-lecture'),ai:style,
+    dates:`オンライン講座希望：${v('f-dt')}`,onlinePreferredDatetime:v('f-dt'),
+    experience:v('f-exp'),payment:'申込後にご案内',price:PRICES[style],referrer:'',
+    idea:`使うPC：${v('f-pc')}`,note:v('f-note'),
+    submittedAt:new Date().toISOString()
+  };
+
+  btn.disabled=true;
+  btn.innerHTML='<span class="spinner"></span>送信中...';
+  let lastError=null;
+  for(let attempt=0;attempt<2;attempt++){
+    try{
+      const res=await fetch(SHEETS_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(data)});
+      const out=await res.json();
+      if(!out.ok) throw new Error('sheets '+(out.error||res.status));
+      lastError=null; break;
+    }catch(err){ lastError=err; console.warn(`sheets error (attempt ${attempt+1})`,err); }
+  }
+  btn.disabled=false;
+  btn.textContent='この内容で予約を申し込む';
+  if(lastError){ msg.textContent='送信に失敗しました。時間をおいて再度お試しください。'; return; }
+
+  document.getElementById('done-text').textContent=
+    `「${data.level}」（${style}・${PRICES[style]}）のお申し込みを受け付けました。ご希望の日時をもとに調整し、${data.email} あてに日時とお支払い方法をお送りします。`;
+  form.hidden=true;
+  document.getElementById('done').hidden=false;
+  document.getElementById('reserve').scrollIntoView({behavior:'smooth'});
+};
+document.getElementById('btn-again').onclick=()=>{
+  form.reset(); submissionId='';
+  form.hidden=false; document.getElementById('done').hidden=true;
+};
+</script>
+</body>
+</html>
